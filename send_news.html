@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📰 إرسال الأخبار - الكلية التقنية بفرسان</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/AD.css">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    p.desc {
+      text-align: center;
+      color: #555;
+      margin-bottom: 25px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    input[type="file"] {
+      display: block;
+      margin-top: 5px;
+    }
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    button,
+    .back-link {
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+    button {
+      background-color: #007bff;
+      color: #fff;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    .back-link {
+      background-color: #e0e0e0;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📰 إرسال الأخبار</h1>
+  </header>
+
+  <main>
+    <div class="container">
+      <p class="desc">
+        من هنا يمكنك إرسال خبر ليظهر للمتدربين أو لمنسوبي الكلية.
+      </p>
+
+      <form action="../PHP/send_news.php" method="POST" enctype="multipart/form-data">
+        <!-- عنوان الخبر -->
+        <div class="form-group">
+          <label for="news_title">عنوان الخبر</label>
+          <input type="text" id="news_title" name="news_title" required>
+        </div>
+
+        <!-- محتوى الخبر -->
+        <div class="form-group">
+          <label for="news_body">نص الخبر</label>
+          <textarea id="news_body" name="news_body" required></textarea>
+        </div>
+
+        <!-- الفئة المستهدفة -->
+        <div class="form-group">
+          <label for="audience">الفئة المستهدفة</label>
+          <select id="audience" name="audience" required>
+            <option value="all">الجميع</option>
+            <option value="students">المتدربون</option>
+            <option value="staff">منسوبو الكلية</option>
+          </select>
+        </div>
+
+        <!-- صورة اختيارية -->
+        <div class="form-group">
+          <label for="news_image">إرفاق صورة (اختياري)</label>
+          <input type="file" id="news_image" name="news_image" accept="image/*">
+        </div>
+
+        <!-- أزرار -->
+        <div class="form-actions">
+          <button type="submit" name="send_news">إرسال الخبر</button>
+          <a href="admin_dashboard.html" class="back-link">⬅ الرجوع للوحة التحكم</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 فرع الكلية التقنية بفرسان — جميع الحقوق محفوظة</p>
+  </footer>
+
+</body>
+</html>

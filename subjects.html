@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📚 المنهاج الدراسي</title>
+  <link rel="stylesheet" href="../CSS/M.css">
+  <link href="https://fonts.googleapis.com/css2?family=Taj
+</head>
+<body>
+
+  <div class="container">
+    <h2>📚 المنهاج الدراسي</h2>
+<select id="dept" required>
+  <option value="">اختر القسم</option>
+  <option value="الحاسب وتقنية المعلومات">💻 الحاسب وتقنية المعلومات</option>
+  <option value="التقنية الإدارية والمالية">💼 التقنية الإدارية والمالية</option>
+  <option value="عام">📚 عام</option>
+</select>
+
+
+    <div class="input-group">
+      <label for="level">المستوى</label>
+      <select id="level" required>
+        <option value="">اختر المستوى</option>
+        <option value="1">المستوى الأول</option>
+        <option value="2">المستوى الثاني</option>
+        <option value="3">المستوى الثالث</option>
+        <option value="4">المستوى الرابع</option>
+      </select>
+    </div>
+
+    <button onclick="showSubjects()">عرض المناهج</button>
+
+    <div class="subjects" id="subjects"></div>
+  </div>
+
+  <script>
+    function showSubjects() {
+      const dept = document.getElementById("dept").value;
+      const level = document.getElementById("level").value;
+      const container = document.getElementById("subjects");
+      container.innerHTML = "";
+
+      if (!dept || !level) {
+        alert("⚠️ يرجى اختيار القسم والمستوى أولاً");
+        return;
+      }
+
+      fetch(`../PHP/get_subjects.php?dept=${dept}&level=${level}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.length === 0) {
+            container.innerHTML = "<p>❌ لا توجد مناهج مرفوعة لهذا القسم أو المستوى بعد.</p>";
+          } else {
+            data.forEach(sub => {
+              const div = document.createElement("div");
+              div.classList.add("subject");
+              div.innerHTML = `
+                <span>📘 ${sub.name}</span>
+                <div class="actions">
+                  <a href="${sub.file}" target="_blank">📄 عرض</a>
+                  <a href="${sub.file}" download>⬇️ تحميل</a>
+                </div>
+              `;
+              container.appendChild(div);
+            });
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          container.innerHTML = "<p>⚠️ حدث خطأ أثناء تحميل المناهج.</p>";
+        });
+    }
+  </script>
+
+</body>
+</html>

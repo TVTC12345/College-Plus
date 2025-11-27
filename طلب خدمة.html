@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>طلب خدمة</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    text-align: right;
+}
+
+header {
+    background-image: url('../images/خلفية الهبددر.jpg');
+    background-color: rgb(255, 255, 255);
+    color: rgb(247, 236, 236);
+    padding: 120px;
+    text-align: center;
+}
+
+.navbar {
+    background-color: #22baced7;
+    overflow: hidden;
+    text-align: center;
+}
+
+.navbar a {
+    float: right;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #000000;
+    color: white;
+}
+
+.dropdown {
+    float: right;
+    overflow: hidden;
+}
+.dropdown .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 20px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(0,0,0,0.7);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: right;
+}
+.dropdown-content a:hover {
+    background-color: #000;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+h1 { text-align: center; color: #333; }
+label { font-size: 12px; color: #333; display: block; margin-top: 10px; }
+
+input, select, textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button {
+    background-color: #22baced7;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+button:hover {
+    background-color: #1a97a8;
+}
+
+footer {
+    background-color: #22baced7;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    font-size: 15px;
+    box-sizing: border-box; 
+}
+
+/* 🔵 زر الدردشة أعلى الصفحة */
+.chat-top-btn {
+    margin: 10px auto 0;
+    display: block;
+    width: auto;
+    background-color: #22baced7;
+    padding: 8px 18px;
+    font-size: 14px;
+    border-radius: 20px;
+}
+.chat-top-btn:hover {
+    background-color: #1a97a8;
+}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>فرع الكلية التقنية بفرسان</h1>
+</header>
+
+<div class="navbar">
+    <a href="trainee.html">الرئيسية</a>
+    <a href="عن الكلية.html">عن الكلية</a>
+    <div class="dropdown">
+        <button class="dropbtn">الأقسام الاكاديمي </button>
+        <div class="dropdown-content">
+            <a href="قسم الحاسب وتقنية المعلومات.html" onclick="showDepartment('comp')"> الحاسب وتقنية المعلومات</a>
+            <a href="قسم التقنية الادارية والمالية.html" onclick="showDepartment('admin')"> التقنية الادارية والمالية</a>
+        </div>
+    </div>
+    <a href="اقسام الادارة.html">اقسام الادارة</a>
+    <a href="قسم التوجيه والارشاد.html"> التوجيه والارشاد</a>
+        <a href="college_request.html">حجز دخول الكلية</a>
+    <a href="subjects.html"> المناهج</a>
+    <a href="روابط مهمة .html">روابط مهمة</a>
+    <a href="الاسئلة الشائعة.html">الاسئلة الشائعة</a>
+    <a href="طلب خدمة.html" onclick="showAppointmentModal()">طلب خدمة </a>
+    <a href="تواصل معنا .html" onclick="showContact()">تواصل معنا</a>
+</div>
+
+<!-- 🔥 زر في أعلى الصفحة ينقل إلى الدردشة -->
+<button type="button" class="chat-top-btn" onclick="goToChat()">
+    💬 الذهاب إلى الدردشة
+</button>
+
+<h1>طلب خدمة</h1>
+
+<form action="../PHP/poststudata.php" method="POST">
+  <label for="student_dep">اختر القسم:</label>
+  <select id="student_dep" name="student_dep" onchange="updateOptions()">
+    <option value="">--Select--</option>
+    <option value="قسم الحاسب وتقنية المعلومات">قسم الحاسب وتقنية المعلومات</option>
+    <option value="قسم التقنية الادارية والمالية">قسم التقنية الادارية والمالية</option>
+    <option value="شؤون المتدربين">شؤون المتدربين</option>
+    <option value="التوجيه والإرشاد">التوجيه والإرشاد</option>
+  </select>
+
+  <label for="student_servies">نوع الخدمة:</label>
+  <select id="student_servies" name="student_servies">
+    <option value="">--Select--</option>
+  </select>
+
+  <label>الاسم الكامل:</label>
+  <input type="text" id="student_name" name="student_name" required>
+
+  <label>رقم الهاتف:</label>
+  <input type="text" id="student_phone" name="student_phone" required>
+
+  <label>الرقم التدريبي:</label>
+  <input type="text" id="student_id" name="student_id" required>
+
+  <label>البريد الإلكتروني:</label>
+  <input type="email" id="student_email" name="student_email" required>
+
+  <label>ملاحظات أخرى:</label>
+  <textarea id="student_comment" name="student_comment" rows="4"></textarea>
+
+  <button type="submit">إرسال</button>
+</form>
+
+<script>
+function updateOptions() {
+  const dep = document.getElementById('student_dep').value;
+  const serv = document.getElementById('student_servies');
+  serv.innerHTML = '';
+  let options = [];
+
+  if (dep === 'قسم الحاسب وتقنية المعلومات' || dep === 'قسم التقنية الادارية والمالية') {
+    options = ['حذف مقرر', 'اضافة مقرر', 'تقديم عذر طبي', 'رفع نموذج تظلم (النظر في موضوع الدرجات)'];
+  } else if (dep === 'شؤون المتدربين' || dep === 'التوجيه والإرشاد') {
+    options = ['مشكلة مالية', 'طلب انسحاب ترم', 'تغيير تخصص', 'تحديث رقم الجوال', 'تحديث ايبان', 'اضافة ايبان'];
+  }
+
+  options.forEach(op => {
+    const option = document.createElement('option');
+    option.value = op;
+    option.textContent = op;
+    serv.appendChild(option);
+  });
+}
+
+// 🔵 الانتقال إلى صفحة الدردشة باستخدام الرقم التدريبي من الحقل
+function goToChat() {
+    const id = document.getElementById('student_id').value.trim();
+    if (!id) {
+        alert('الرجاء إدخال الرقم التدريبي أولاً في الحقل المخصص.');
+        return;
+    }
+    // عدّل المسار إذا كان ملف الدردشة في مكان مختلف
+    window.location.href = '../PHP/student_chat.php?student_id=' + encodeURIComponent(id);
+}
+</script>
+
+<footer>
+  <p>جميع الحقوق محفوظة 2024 &copy;<br><br>  
+  المتدرب / فيصل علي عريشي <br>
+  المتدرب / مروان محمد جوخب <br>
+  المتدرب / تركي عسيري <br>
+  المتدرب / يحى كعبي <br><br>
+  بإشراف م/ ياسر عبدالله الزهراني</p>
+</footer>
+
+</body>
+</html>

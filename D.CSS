@@ -1,0 +1,73 @@
+body {
+  font-family: "Cairo", sans-serif;
+  background: #f0f2f5;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  background: #004080;
+  color: white;
+  padding: 15px;
+  margin: 0;
+}
+
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 0 10px #ccc;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.allow {
+  background: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.violate {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 25%;
+  left: 35%;
+  background: white;
+  border: 2px solid #004080;
+  box-shadow: 0 0 10px #666;
+  padding: 20px;
+}
+
+textarea {
+  width: 250px;
+  height: 100px;
+}
+
+.report-btn, .back-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #004080;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.report-btn:hover, .back-btn:hover {
+  background: #002a5c;
+}
